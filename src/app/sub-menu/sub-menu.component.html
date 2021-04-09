@@ -1,0 +1,22 @@
+<mat-menu #childMenu="matMenu" (closed)="closed.emit()">
+    <ng-container *ngFor="let child of items">
+        <!-- Handle branch node menu items -->
+        <ng-container *ngIf="child.items && child.items.length > 0">
+            <button mat-menu-item color="primary" [matMenuTriggerFor]="menu.childMenu" title="{{child.label}}"
+                class="fes-menu-item">
+                <span class="fa fa-fw" *ngIf="child.icon" [ngClass]="child.icon" style="margin-right: 5px;"></span>
+                <span>{{child.label}}</span>
+            </button>
+            <app-sub-menu #menu [items]="child.items"></app-sub-menu>
+        </ng-container>
+        <!-- Handle leaf node menu items -->
+        <ng-container *ngIf="!child.items || child.items.length === 0">
+            <button mat-menu-item (keyup.enter)="itemClick($event, child)" (click)="itemClick($event, child)"
+                title="{{child.label}}" [routerLink]="child.route" [queryParams]="child.queryParams"
+                class="fes-menu-item">
+                <span class="fa fa-fw" *ngIf="child.icon" [ngClass]="child.icon" style="margin-right: 5px;"></span>
+                <span>{{child.label}}</span>
+            </button>
+        </ng-container>
+    </ng-container>
+</mat-menu>

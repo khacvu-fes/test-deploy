@@ -1,0 +1,19 @@
+<ng-container *ngFor="let item of menuAngular">
+
+    <span *ngIf="item.items && item.items.length > 0">
+        <button style="z-index: 1020;" mat-button [matMenuTriggerFor]="menu.childMenu" (click)="ClickMenu(trigger)"
+            #trigger="matMenuTrigger" (mouseenter)="buttonEnter(trigger)" class="menu-fes">
+            <span *ngIf="item.icon" [ngClass]="item.icon" style="margin-right: 5px;"></span>
+            <span>{{item.label}}</span>
+            <span class="fa fa-fw fa-caret-down" style="margin-left: 5px;"></span>
+        </button>
+        <app-sub-menu #menu [items]="item.items" (closed)="CloseMenu()"></app-sub-menu>
+    </span>
+
+    <span *ngIf="!item.items || item.items.length === 0">
+        <button mat-button color="primary" [routerLink]="item.route" [queryParams]="item.queryParams">
+            <span *ngIf="item.icon" [ngClass]="item.icon" style="margin-right: 5px;"></span>
+            <span>{{item.label}}</span>
+        </button>
+    </span>
+</ng-container>

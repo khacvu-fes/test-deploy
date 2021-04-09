@@ -1,0 +1,6 @@
+<p-inputMask mask="99/99/9999" placeholder="  /  /    " 
+slotChar=" " [(ngModel)]="text" (change)="OnChange()" [autoClear]="false" styleClass="fes-datebox" [readonly]="readonly"> </p-inputMask>
+<div style="display: inline-block; position: relative;">
+    <button *ngIf="showIcon" type="button" icon="pi pi-calendar" pButton (click)="ShowDatePicker()" class="ui-datepicker-trigger ui-calendar-button" tabindex="-1" [disabled]="readonly"></button>
+<p-calendar [style]="{'position': 'fixed','overflow': 'visible','z-index': '997'}" class="date-picker" *ngIf="showDatePicker" [(ngModel)]="value" [inline]="true" [showWeek]="true" (onSelect)="SelectDate()" (click)="datepickerClick = true"></p-calendar>
+</div>
